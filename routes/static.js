@@ -2,9 +2,9 @@ const Router = require('koa-router')
 const router = new Router()
 
 router.get('/', ctx => {
-  ctx.json({
+  ctx.body = {
     message: 'This is the Static'
-  })
+  };
 })
 
 // handles 404 on /static

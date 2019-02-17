@@ -4,11 +4,12 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 const logger = require('koa-logger')
-const static = require('koa-static')
+//const static = require('koa-static')
+const bodyParser = require('koa-bodyparser')
 // utils
 const path = require('path')
+const mongoose = require('mongoose');
 // middlewares
-const json = require('./middlewares/json')
 const error = require('./middlewares/error')
 // routes
 const apiRouter = require('./routes/api')
@@ -20,10 +21,12 @@ const staticRouter = require('./routes/static')
 const app = new Koa()
 const router = new Router()
 
+mongoose.connect('mongodb://localhost:27017/alx10ier', {useNewUrlParser: true});
+
 app.use(error())
 app.use(logger())
-app.use(json())
-app.use(static(path.join(__dirname, 'static')));
+app.use(bodyParser())
+//app.use(static(path.join(__dirname, 'static')));
 app.use(router.routes())
 app.use(router.allowedMethods())
 // ---------- /middlewares ----------

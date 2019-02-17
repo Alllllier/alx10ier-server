@@ -8,10 +8,10 @@ module.exports = () => {
           }
       } catch (err) {
           ctx.status = err.status || 500
-          ctx.json({
+          ctx.body = {
             status: err.status,
             message: err.message
-          });
+          }
       }
   };
 }
